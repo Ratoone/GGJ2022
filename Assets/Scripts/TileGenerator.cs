@@ -11,6 +11,7 @@ public class TileGenerator : MonoBehaviour
     public float scale;
     public string levelName;
     public GameObject referenceTile;
+    public GameObject wall;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,15 @@ public class TileGenerator : MonoBehaviour
                 tiles[i,j] = newTile;
             }
         }
+
+        GameObject wall1 = Instantiate(wall, scale * new Vector3(size / 2, 0, -1f), Quaternion.identity) as GameObject;
+        wall1.transform.localScale = new Vector3(size * scale, 100, 1);
+        GameObject wall2 = Instantiate(wall, scale * new Vector3(-1f, 0, size / 2), Quaternion.identity) as GameObject;
+        wall2.transform.localScale = new Vector3(1, 100, size * scale);
+        GameObject wall3 = Instantiate(wall, scale * new Vector3(size / 2, 0, size), Quaternion.identity) as GameObject;
+        wall3.transform.localScale = new Vector3(size * scale, 100, 1);
+        GameObject wall4 = Instantiate(wall, scale * new Vector3(size, 0, size / 2), Quaternion.identity) as GameObject;
+        wall4.transform.localScale = new Vector3(1, 100, size * scale);
     }
 
     // Update is called once per frame
