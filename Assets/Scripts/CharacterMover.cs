@@ -6,11 +6,11 @@ using UnityEngine;
 public class CharacterMover : MonoBehaviour
 {
     public float forwardSpeed = 5.0f;
+    public float turnSpeed = 2f;
     public float tileFillingQuantity;
 
     private CharacterController controller;
     private Vector3 movingDirection;
-    private bool keyPressed = false;
     private bool isAbsorbing = true;
     private Color storedColor = Color.white;
     private float storedContainer = 0f;
@@ -31,24 +31,13 @@ public class CharacterMover : MonoBehaviour
 
         float verticalVelocity = controller.isGrounded || !isAbsorbing ? 0 : -1;
 
-        Vector3 newDirection = new Vector3(Math.Sign(Input.GetAxis("Horizontal")), 0, Math.Sign(Input.GetAxis("Vertical")));
-        if (newDirection == Vector3.zero) {
-            keyPressed = false;
-        }
-        if (!keyPressed && Math.Abs(newDirection[0]) + Math.Abs(newDirection[2]) == 1) {
-            movingDirection = this.transform.TransformDirection(newDirection);
-            keyPressed = true;
-        }
+        Vector3 targetRotation = new Vector3(0, 90*Math.Sign(Input.GetAxis("Horizontal")), 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, transform.rotation * Quaternion.Euler(targetRotation), Time.deltaTime * turnSpeed);
 
+        movingDirection = transform.forward;
         movingDirection.y = verticalVelocity;
 
         controller.Move(movingDirection * forwardSpeed * Time.deltaTime * forwardSpeed);
-
-        if (movingDirection != Vector3.zero)
-        {
-            gameObject.transform.forward = new Vector3(movingDirection[0], 0, movingDirection[2]);
-        }
-
     }
     
     private void OnCollisionEnter(Collision other) {
