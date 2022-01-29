@@ -22,6 +22,8 @@ public class CharacterMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float verticalVelocity = controller.isGrounded ? 0 : -1;
+
         Vector3 newDirection = new Vector3(Math.Sign(Input.GetAxis("Horizontal")), 0, Math.Sign(Input.GetAxis("Vertical")));
         if (newDirection == Vector3.zero) {
             keyPressed = false;
@@ -31,11 +33,13 @@ public class CharacterMover : MonoBehaviour
             keyPressed = true;
         }
 
+        movingDirection.y = verticalVelocity;
+
         controller.Move(movingDirection * forwardSpeed * Time.deltaTime * forwardSpeed);
 
         if (movingDirection != Vector3.zero)
         {
-            gameObject.transform.forward = movingDirection;
+            gameObject.transform.forward = new Vector3(movingDirection[0], 0, movingDirection[2]);
         }
 
     }
