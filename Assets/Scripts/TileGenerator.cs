@@ -20,9 +20,8 @@ public class TileGenerator : MonoBehaviour
             for (int j = 0; j < size; j++) {
                 GameObject newTile = Instantiate(referenceTile, new Vector3((float)i, 1, (float)j), Quaternion.identity) as GameObject;
                 newTile.transform.localScale = Vector3.one;
-                // newTile.selectColor()
                 // newTile.GetComponent<Renderer>().material.SetColor("_Color", Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f));
-                newTile.GetComponent<Renderer>().material.SetColor("_Color", levelBitmap.GetPixel(i,j));
+                newTile.GetComponent<Tile>().setInstantColor(levelBitmap.GetPixel(i,j));
                 tiles[i,j] = newTile;
             }
         }
