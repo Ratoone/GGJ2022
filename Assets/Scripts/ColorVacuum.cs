@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ColorVacuum : MonoBehaviour
 {
+    public InkBar inkBar;
     public float tileFillingQuantity;
     public bool isAbsorbing {get; private set;} = true;
     private Color storedColor;
@@ -16,6 +17,9 @@ public class ColorVacuum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        inkBar.setInkLevel(storedContainer);
+        inkBar.setInkColor(storedColor);
+
         if (Input.GetKeyDown("space")) {
             isAbsorbing = !isAbsorbing;
         }
