@@ -13,9 +13,9 @@ public class Tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fadingProgress >= 1f) {
+        if (fadingProgress > 1f) {
             fadingProgress = 0f;
-            oldColor = targetColor;
+            setInstantColor(targetColor);
             return;
         }
 
@@ -23,7 +23,6 @@ public class Tile : MonoBehaviour
             return;
         }
 
-        
         setColor(Color.Lerp(oldColor, targetColor, fadingProgress));
         fadingProgress += Time.deltaTime / fadingTime;
     }
@@ -40,6 +39,7 @@ public class Tile : MonoBehaviour
 
     public void setFadingColor(Color color) {
         targetColor = color;
+        fadingProgress = 0;
     }
 
     private void setColor(Color color) {
