@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 126fec0018ee3be4780225577a19307e, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -823,7 +823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 15
   scale: 0.8
-  levelName: Test
+  levelName: Level1
   referenceTile: {fileID: 1611030834}
   wall: {fileID: 1682504640}
 --- !u!4 &1090039110
