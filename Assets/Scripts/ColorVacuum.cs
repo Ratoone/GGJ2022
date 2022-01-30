@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ColorVacuum : MonoBehaviour
 {
+    public PauseMenu canvas;
     public InkBar inkBar;
     public float tileFillingQuantity;
+    public float goalColorThreshold;
     public bool isAbsorbing {get; private set;} = true;
     private Color storedColor;
     private float storedContainer = 0f;
@@ -31,6 +33,19 @@ public class ColorVacuum : MonoBehaviour
     }
     
     private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.transform.tag == "Finish") {
+            Color otherColor = other.gameObject.GetComponent<Renderer>().material.GetColor("_EmissionColor");
+            Vector4 colorDifference = storedColor - otherColor;
+            Debug.Log(colorDifference.magnitude);
+            if (colorDifference.magnitude < goalColorThreshold) {
+                canvas.win();
+            }
+            else {
+                canvas.warning();
+            }
+            return;
+        }
+
         if (other.gameObject.transform.tag == "Ground"){
             Tile tile = other.gameObject.GetComponent<Tile>(); 
             if (tile.isFading()) {

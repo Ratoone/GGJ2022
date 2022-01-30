@@ -13,6 +13,8 @@ public class TileGenerator : MonoBehaviour
     public GameObject referenceTile;
     public GameObject wall;
     public GameObject endGoal;
+    public GameObject player;
+    public Vector2 playerPosition;
     public Vector2 goalPosition;
     public Color goalColor;
 
@@ -33,10 +35,12 @@ public class TileGenerator : MonoBehaviour
             }
         }
 
-        endGoal.transform.position = new Vector3(goalPosition[0], 1, goalPosition[1]);
+        endGoal.transform.position = new Vector3(scale * goalPosition[0], 1, scale * goalPosition[1]);
         endGoal.transform.localScale *= scale;
         endGoal.GetComponent<Renderer>().material.SetColor("_EmissionColor", goalColor);
 
+        player.transform.position = new Vector3(scale * playerPosition[0], 1, scale * playerPosition[1]);
+        
         GameObject wall1 = Instantiate(wall, scale * new Vector3(levelBitmap.width / 2, 0, -1f), Quaternion.identity) as GameObject;
         wall1.transform.localScale = new Vector3(levelBitmap.width * scale, 100, 1);
         GameObject wall2 = Instantiate(wall, scale * new Vector3(-1f, 0, levelBitmap.height / 2), Quaternion.identity) as GameObject;
