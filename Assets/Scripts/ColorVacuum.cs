@@ -36,8 +36,7 @@ public class ColorVacuum : MonoBehaviour
         if (other.gameObject.transform.tag == "Finish") {
             Color otherColor = other.gameObject.GetComponent<Renderer>().material.GetColor("_EmissionColor");
             Vector4 colorDifference = storedColor - otherColor;
-            Debug.Log(colorDifference.magnitude);
-            if (colorDifference.magnitude < goalColorThreshold) {
+            if (otherColor == Color.white || colorDifference.magnitude < goalColorThreshold) {
                 canvas.win();
             }
             else {
@@ -48,6 +47,16 @@ public class ColorVacuum : MonoBehaviour
 
         if (other.gameObject.transform.tag == "Ground"){
             Tile tile = other.gameObject.GetComponent<Tile>(); 
+            
+            if (!other.gameObject.GetComponent<Renderer>().enabled) {
+                if (isAbsorbing) {
+                    other.gameObject.SetActive(false);
+                }
+                else {
+                    other.gameObject.GetComponent<Renderer>().enabled = true;
+                }
+            }
+
             if (tile.isFading()) {
                 return;
             }

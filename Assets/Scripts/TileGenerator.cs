@@ -21,6 +21,7 @@ public class TileGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         string levelName = SceneManager.GetActiveScene().name;
         levelBitmap = Resources.Load("Levels/" + levelName) as Texture2D;
 
@@ -29,8 +30,13 @@ public class TileGenerator : MonoBehaviour
             for (int j = 0; j < levelBitmap.height; j++) {
                 GameObject newTile = Instantiate(referenceTile, scale * new Vector3((float)i, 0, (float)j), referenceTile.transform.rotation) as GameObject;
                 newTile.transform.localScale *= scale;
-                // newTile.GetComponent<Renderer>().material.SetColor("_Color", Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f));
-                newTile.GetComponent<Tile>().setInstantColor(levelBitmap.GetPixel(i,j));
+                if (levelBitmap.GetPixel(i,j).a < 1f) {
+                    newTile.GetComponent<Renderer>().enabled = false;
+                    newTile.GetComponent<Tile>().setInstantColor(Color.black);
+                }
+                else {
+                    newTile.GetComponent<Tile>().setInstantColor(levelBitmap.GetPixel(i,j));
+                }
                 tiles[i,j] = newTile;
             }
         }
@@ -49,11 +55,5 @@ public class TileGenerator : MonoBehaviour
         wall3.transform.localScale = new Vector3(levelBitmap.width * scale, 100, 1);
         GameObject wall4 = Instantiate(wall, scale * new Vector3(levelBitmap.width, 0, levelBitmap.height / 2), Quaternion.identity) as GameObject;
         wall4.transform.localScale = new Vector3(1, 100, levelBitmap.height * scale);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

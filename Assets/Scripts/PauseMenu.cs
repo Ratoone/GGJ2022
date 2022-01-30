@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public static bool isPaused = false;
     public GameObject pauseMenuUi;
     public GameObject winUi;
+    public GameObject loseUi;
 
     // Update is called once per frame
     void Update()
@@ -47,5 +48,14 @@ public class PauseMenu : MonoBehaviour
 
     public void warning() {
 
+    }
+    public void lose() {
+        Time.timeScale = 0;
+        loseUi.SetActive(true);
+    }
+
+    public void restart() {
+        Scene scene = SceneManager.GetActiveScene(); 
+        SceneManager.LoadScene(scene.name);
     }
 }
