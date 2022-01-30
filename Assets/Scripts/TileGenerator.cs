@@ -12,6 +12,9 @@ public class TileGenerator : MonoBehaviour
     // public string levelName;
     public GameObject referenceTile;
     public GameObject wall;
+    public GameObject endGoal;
+    public Vector2 goalPosition;
+    public Color goalColor;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,10 @@ public class TileGenerator : MonoBehaviour
                 tiles[i,j] = newTile;
             }
         }
+
+        endGoal.transform.position = new Vector3(goalPosition[0], 1, goalPosition[1]);
+        endGoal.transform.localScale *= scale;
+        endGoal.GetComponent<Renderer>().material.SetColor("_EmissionColor", goalColor);
 
         GameObject wall1 = Instantiate(wall, scale * new Vector3(levelBitmap.width / 2, 0, -1f), Quaternion.identity) as GameObject;
         wall1.transform.localScale = new Vector3(levelBitmap.width * scale, 100, 1);
