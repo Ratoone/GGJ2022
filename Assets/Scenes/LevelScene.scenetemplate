@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13966, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: LevelScene
+  m_EditorClassIdentifier: 
+  templateScene: {fileID: 102900000, guid: 42f385a62d7d7c34191fc3b75660db70, type: 3}
+  templateName: Generic Scene
+  description: 
+  preview: {fileID: 0}
+  dependencies:
+  - dependency: {fileID: 2800000, guid: b03e79c6f6cc7824588270dece47062d, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 919132149155446097, guid: 85a4060b047eff548ac8fc231d79f83d, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 919132149155446097, guid: dda06171104adb64f8c4e1801a3cd6f3, type: 3}
+    instantiationMode: 0
+  templatePipeline: {fileID: 0}
+  addToDefaults: 1
