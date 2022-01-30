@@ -21,8 +21,13 @@ public class ColorVacuum : MonoBehaviour
         inkBar.setInkColor(storedColor);
 
         if (Input.GetKeyDown("space")) {
-            isAbsorbing = !isAbsorbing;
+            flip();
         }
+    }
+
+    private void flip() {
+        isAbsorbing = !isAbsorbing;
+        GetComponentInChildren<Animator>().SetTrigger("Flip");
     }
     
     private void OnCollisionEnter(Collision other) {
@@ -39,7 +44,7 @@ public class ColorVacuum : MonoBehaviour
                 storedContainer += tileFillingQuantity;
                 if (storedContainer >= 1f) {
                     storedContainer = 1f;
-                    isAbsorbing = !isAbsorbing;
+                    flip();
                     return;
                 }
 
@@ -52,7 +57,7 @@ public class ColorVacuum : MonoBehaviour
                 storedContainer -= tileFillingQuantity;
                 if (storedContainer <= 0) {
                     storedContainer = 0;
-                    isAbsorbing = !isAbsorbing;
+                    flip();
                 }
             }
         }

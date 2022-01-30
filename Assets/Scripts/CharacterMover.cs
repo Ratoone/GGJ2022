@@ -10,7 +10,6 @@ public class CharacterMover : MonoBehaviour
 
     private CharacterController controller;
     private Vector3 movingDirection;
-    private int flipAngle = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -22,9 +21,6 @@ public class CharacterMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space")) {
-            flipAngle = 180 - flipAngle;
-        }
         float verticalVelocity = controller.isGrounded || !GetComponent<ColorVacuum>().isAbsorbing ? 0 : -1;
 
         Vector3 targetRotation = new Vector3(0, 90*Math.Sign(Input.GetAxis("Horizontal")), 0);
